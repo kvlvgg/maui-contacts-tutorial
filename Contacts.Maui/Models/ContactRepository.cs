@@ -45,5 +45,20 @@ namespace Contacts.Maui.Models
             contactToUpdate.Name = contact.Name;
             contactToUpdate.Phone = contact.Phone;
         }
+
+        public static void AddContact(Contact contact)
+        {
+            int maxId = _contacts.Max(x => x.ContactId);
+            contact.ContactId = maxId + 1;
+            _contacts.Add(contact);
+        }
+
+        public static void DeleteContact(int contactId)
+        {
+            var contact = _contacts.FirstOrDefault(x => x.ContactId == contactId);
+            if (contact == null) return;
+
+            _contacts.Remove(contact);
+        }
     }
 }
